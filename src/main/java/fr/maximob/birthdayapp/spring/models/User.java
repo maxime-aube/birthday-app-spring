@@ -1,4 +1,6 @@
-package fr.maximob.birthdayapp.birthdayapp.models;
+package fr.maximob.birthdayapp.spring.models;
+
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +15,7 @@ public class User {
     private String password;
     private String email;
     @OneToMany(mappedBy="user")
+    @Lazy
     private Set<Birthday> birthdays;
 
     public User() {

@@ -1,4 +1,6 @@
-package fr.maximob.birthdayapp.birthdayapp.models;
+package fr.maximob.birthdayapp.spring.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,10 +16,20 @@ public class Birthday {
     private String lastname;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     public Birthday() {
         super();
+    }
+
+    public Birthday(Long id, LocalDate date, String firstname, String lastname, User user) {
+        super();
+        this.id = id;
+        this.date = date;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.user = user;
     }
 
     public Long getId() {

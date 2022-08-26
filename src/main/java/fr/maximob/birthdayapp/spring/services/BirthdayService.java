@@ -1,9 +1,10 @@
-package fr.maximob.birthdayapp.birthdayapp.services;
+package fr.maximob.birthdayapp.spring.services;
 
-import fr.maximob.birthdayapp.birthdayapp.models.Birthday;
-import fr.maximob.birthdayapp.birthdayapp.repositories.BirthdayRepository;
+import fr.maximob.birthdayapp.spring.models.Birthday;
+import fr.maximob.birthdayapp.spring.repositories.BirthdayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 
@@ -19,8 +20,12 @@ public class BirthdayService {
         return birthdayRepository.findAll();
     }
 
+    public Birthday getOneBirthdayById(Long id) {
+        return birthdayRepository.findById(id).orElseThrow(() -> new ResourceAccessException("could not find birthday"));
+    }
+
     public List<Birthday> getBirthdaysByUserId(Long userId) {
-        return userService.getOneUserById(userId).getBirthdays().stream().toList();
+        return userService.getUserById(userId).getBirthdays().stream().toList();
     }
 
     public Birthday save(Birthday birthday) {

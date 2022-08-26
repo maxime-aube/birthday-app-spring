@@ -1,10 +1,11 @@
-package fr.maximob.birthdayapp.birthdayapp.repositories;
+package fr.maximob.birthdayapp.spring.repositories;
 
-import fr.maximob.birthdayapp.birthdayapp.models.User;
+import fr.maximob.birthdayapp.spring.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
     Optional<User> findByUsernameAndPassword(String username, String password);
 }
